@@ -10,7 +10,13 @@ interface Props {
 const { property, large = false } = Astro.props;
 ---
 
-<article class:list={['card', { 'card--large': large }]} data-cursor="view" data-reveal>
+<a
+  class:list={['card', { 'card--large': large }]}
+  href={`/propiedades/${property.slug}`}
+  data-cursor="view"
+  data-reveal
+  aria-label={`Ver ${property.name} — ${property.zone}, ${property.city}`}
+>
   <div class="card__media">
     <img
       src={property.image}
@@ -36,7 +42,7 @@ const { property, large = false } = Astro.props;
       Ver detalles <ArrowRight size={12} />
     </span>
   </div>
-</article>
+</a>
 
 <style>
   .card {
@@ -48,6 +54,8 @@ const { property, large = false } = Astro.props;
     border-radius: var(--radius-card);
     isolation: isolate;
     cursor: pointer;
+    color: var(--color-white);
+    text-decoration: none;
     transition: transform 0.6s var(--ease-luxury);
   }
 
