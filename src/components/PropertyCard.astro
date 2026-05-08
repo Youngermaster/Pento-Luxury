@@ -1,0 +1,171 @@
+---
+import type { Property } from '../data/properties';
+import ArrowRight from './icons/ArrowRight.astro';
+
+interface Props {
+  property: Property;
+  large?: boolean;
+}
+
+const { property, large = false } = Astro.props;
+---
+
+<article class:list={['card', { 'card--large': large }]} data-cursor="view" data-reveal>
+  <div class="card__media">
+    <img
+      src={property.image}
+      alt={property.alt}
+      width="1600"
+      height={large ? 2000 : 1200}
+      loading="lazy"
+      decoding="async"
+      class="parallax-img"
+    />
+    <span class="card__status mono">{property.status}</span>
+    <div class="card__overlay" aria-hidden="true"></div>
+  </div>
+
+  <div class="card__body">
+    <p class="card__zone mono">{property.zone}, {property.city}</p>
+    <h3 class="card__name display">{property.name}</h3>
+    <p class="card__price display">{property.price}</p>
+    <p class="card__stats mono">
+      {property.bedrooms} hab · {property.area} · {property.parking} parqueaderos
+    </p>
+    <span class="card__cta mono">
+      Ver detalles <ArrowRight size={12} />
+    </span>
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--color-charcoal);
+    border-radius: var(--radius-card);
+    isolation: isolate;
+    cursor: pointer;
+    transition: transform 0.6s var(--ease-luxury);
+  }
+
+  .card__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+
+  .card--large .card__media {
+    aspect-ratio: 4 / 5;
+  }
+
+  .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-luxury);
+    transform: scale(1.04);
+  }
+
+  .card:hover .card__media img {
+    transform: scale(1.1);
+  }
+
+  .card__status {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 2;
+    padding: 6px 10px;
+    background: rgba(8, 8, 8, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--color-gold);
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    border: var(--border-thin);
+    border-radius: var(--radius-card);
+  }
+
+  .card__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-card);
+    opacity: 0.85;
+    transition: opacity 0.6s var(--ease-luxury);
+    pointer-events: none;
+  }
+  .card:hover .card__overlay { opacity: 1; }
+
+  .card__body {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    padding: clamp(20px, 3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--color-white);
+  }
+
+  .card__zone {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-silver);
+  }
+
+  .card__name {
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.05;
+    color: var(--color-white);
+    font-weight: 300;
+    margin-top: 4px;
+  }
+
+  .card__price {
+    font-size: clamp(16px, 1.6vw, 22px);
+    color: var(--color-gold);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-top: 4px;
+  }
+
+  .card__stats {
+    color: var(--color-silver);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-gold);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 16px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition:
+      transform 0.5s var(--ease-luxury),
+      opacity 0.4s ease;
+  }
+
+  .card:hover .card__cta {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .card__cta {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>
