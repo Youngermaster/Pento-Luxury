@@ -5,6 +5,8 @@ export interface Zone {
   count: number;
   image: string;
   alt: string;
+  /** Slug of the most representative AV Group project in this zone. */
+  projectSlug: string;
 }
 
 // AV Group's actual operating sub-zones in and around Medellín.
@@ -18,6 +20,7 @@ export const zones: Zone[] = [
     count: 8,
     image: av('Foto.23.jpg'),
     alt: 'El Poblado — corazón residencial de Medellín',
+    projectSlug: 'selvavignon',
   },
   {
     id: 'astorga',
@@ -26,6 +29,7 @@ export const zones: Zone[] = [
     count: 1,
     image: av('Astorga_IMG02_1.jpg'),
     alt: 'Astorga, Milla de Oro — distrito financiero',
+    projectSlug: 'hive-bluum',
   },
   {
     id: 'alto-de-las-palmas',
@@ -34,6 +38,7 @@ export const zones: Zone[] = [
     count: 2,
     image: av('PHOTO-2024-01-24-09-21-10.jpg'),
     alt: 'Alto de las Palmas — montaña sobre el Valle de Aburrá',
+    projectSlug: 'nuv',
   },
   {
     id: 'el-campestre',
@@ -42,6 +47,7 @@ export const zones: Zone[] = [
     count: 1,
     image: av('SM_3.jpg'),
     alt: 'El Campestre — sector residencial consolidado',
+    projectSlug: 'cantero',
   },
   {
     id: 'nuevo-provenza',
@@ -50,5 +56,6 @@ export const zones: Zone[] = [
     count: 1,
     image: av('IMG_1526.jpg'),
     alt: 'Nuevo Provenza — escena vibrante de El Poblado',
+    projectSlug: 'wake',
   },
 ];

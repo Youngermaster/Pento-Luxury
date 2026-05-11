@@ -10,23 +10,66 @@ export function initCursor() {
   const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   const dotPos = { x: mouse.x, y: mouse.y };
   const ringPos = { x: mouse.x, y: mouse.y };
-  let active = false;
-  let label: 'default' | 'view' = 'default';
+  let visible = false;
+  let running = false;
+  const SETTLED = 0.3;
 
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    if (!active) {
-      dot.style.opacity = '1';
-      ring.style.opacity = '1';
-      active = true;
+  function paint() {
+    dot!.style.transform = `translate3d(${dotPos.x}px, ${dotPos.y}px, 0) translate(-50%, -50%)`;
+    ring!.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`;
+  }
+
+  function tick() {
+    const ddx = mouse.x - dotPos.x;
+    const ddy = mouse.y - dotPos.y;
+    const rdx = mouse.x - ringPos.x;
+    const rdy = mouse.y - ringPos.y;
+    const settled =
+      Math.abs(ddx) < SETTLED && Math.abs(ddy) < SETTLED &&
+      Math.abs(rdx) < SETTLED && Math.abs(rdy) < SETTLED;
+
+    if (settled) {
+      // Snap to exact target so we don't carry sub-pixel drift forward.
+      dotPos.x = mouse.x; dotPos.y = mouse.y;
+      ringPos.x = mouse.x; ringPos.y = mouse.y;
+      paint();
+      running = false;
+      return;
     }
-  });
+
+    dotPos.x = lerp(dotPos.x, mouse.x, 0.4);
+    dotPos.y = lerp(dotPos.y, mouse.y, 0.4);
+    ringPos.x = lerp(ringPos.x, mouse.x, 0.12);
+    ringPos.y = lerp(ringPos.y, mouse.y, 0.12);
+    paint();
+    requestAnimationFrame(tick);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener(
+    'mousemove',
+    (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      if (!visible) {
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        visible = true;
+      }
+      start();
+    },
+    { passive: true }
+  );
 
   window.addEventListener('mouseleave', () => {
     dot.style.opacity = '0';
     ring.style.opacity = '0';
-    active = false;
+    visible = false;
   });
 
   // Hover states
@@ -34,7 +77,6 @@ export function initCursor() {
     ring.classList.toggle('cursor-ring--hover', on);
   };
   const setView = (on: boolean) => {
-    label = on ? 'view' : 'default';
     ring.classList.toggle('cursor-ring--view', on);
     ring.textContent = on ? 'VER' : '';
   };
@@ -51,16 +93,4 @@ export function initCursor() {
     if (t.closest('a, button, .interactive')) setHover(false);
     if (t.closest('[data-cursor="view"]')) setView(false);
   });
-
-  const tick = () => {
-    dotPos.x = lerp(dotPos.x, mouse.x, 0.4);
-    dotPos.y = lerp(dotPos.y, mouse.y, 0.4);
-    ringPos.x = lerp(ringPos.x, mouse.x, 0.12);
-    ringPos.y = lerp(ringPos.y, mouse.y, 0.12);
-    dot.style.transform = `translate3d(${dotPos.x}px, ${dotPos.y}px, 0) translate(-50%, -50%)`;
-    ring.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`;
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-  void label;
 }

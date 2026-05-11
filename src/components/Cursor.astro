@@ -15,7 +15,8 @@
     z-index: 9999;
     opacity: 0;
     transition: opacity 0.25s ease;
-    will-change: transform;
+    /* will-change removed — the rAF loop now stops itself when settled,
+       so we don't need a permanent compositor layer reservation. */
   }
 
   .cursor-dot {

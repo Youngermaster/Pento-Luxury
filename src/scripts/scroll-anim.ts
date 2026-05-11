@@ -34,27 +34,25 @@ export function initScrollAnimations() {
     );
   }
 
-  // Generic reveal-on-scroll for [data-reveal] elements
+  // Generic reveal-on-scroll — batched into a single ScrollTrigger.batch
+  // call so we don't pay the cost of N independent trigger instances.
   const reveals = gsap.utils.toArray<HTMLElement>('[data-reveal]');
-  reveals.forEach((el) => {
-    const y = parseInt(el.dataset.revealY || '60', 10);
-    const delay = parseFloat(el.dataset.revealDelay || '0');
-    gsap.fromTo(
-      el,
-      { opacity: 0, y },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.1,
-        delay,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-        },
-      }
-    );
-  });
+  if (reveals.length) {
+    gsap.set(reveals, { opacity: 0, y: 60 });
+    ScrollTrigger.batch(reveals, {
+      start: 'top 88%',
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          opacity: 1,
+          y: 0,
+          duration: 1.1,
+          ease: 'power3.out',
+          stagger: 0.06,
+          overwrite: 'auto',
+        }),
+      // No onEnterBack — once revealed, it stays revealed.
+    });
+  }
 
   // Generic counters via [data-counter-scroll]
   const counters = gsap.utils.toArray<HTMLElement>('[data-counter-scroll]');
@@ -75,25 +73,29 @@ export function initScrollAnimations() {
     });
   });
 
-  // Parallax on .parallax-img
-  gsap.utils.toArray<HTMLElement>('.parallax-img').forEach((img) => {
-    const parent = img.parentElement;
-    if (!parent) return;
-    gsap.fromTo(
-      img,
-      { yPercent: -8 },
-      {
-        yPercent: 8,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: parent,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-  });
+  // Parallax on .parallax-img — desktop only. On mobile the scrub triggers
+  // create real scroll jank with no perceived payoff (small viewport, fast
+  // scroll velocity). Disabled below 1024px.
+  if (window.matchMedia('(min-width: 1024px)').matches) {
+    gsap.utils.toArray<HTMLElement>('.parallax-img').forEach((img) => {
+      const parent = img.parentElement;
+      if (!parent) return;
+      gsap.fromTo(
+        img,
+        { yPercent: -6 },
+        {
+          yPercent: 6,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: parent,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.6,
+          },
+        }
+      );
+    });
+  }
 
   // Refresh after fonts/images settle
   if (document.fonts && 'ready' in document.fonts) {

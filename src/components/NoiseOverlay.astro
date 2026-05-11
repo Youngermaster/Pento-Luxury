@@ -18,17 +18,21 @@
 <style>
   .noise-overlay {
     position: fixed;
-    inset: -50%;
-    width: 200%;
-    height: 200%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     z-index: 9998;
-    opacity: 0.035;
+    opacity: 0.06;
     pointer-events: none;
-    mix-blend-mode: overlay;
-    will-change: auto;
+    /*
+     * NOTE: previously used mix-blend-mode: overlay which forces every
+     * underlying paint to recomposite against this layer on scroll —
+     * a serious scroll-jank source on long pages. Plain opacity gives a
+     * very similar grain effect with zero composite cost.
+     */
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .noise-overlay { opacity: 0.02; }
+    .noise-overlay { opacity: 0.03; }
   }
 </style>

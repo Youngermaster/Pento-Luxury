@@ -13,16 +13,25 @@ import ArrowRight from './icons/ArrowRight.astro';
 
   <div class="zones__container" data-zones>
     {zones.map((z, i) => (
-      <article class="zone" data-zone-item style={`background-image:url(${z.image})`} data-cursor="view">
+      <a
+        class="zone"
+        href={`/proyectos/${z.projectSlug}`}
+        data-zone-item
+        style={`background-image:url(${z.image})`}
+        data-cursor="view"
+        aria-label={`Explorar zona ${z.name} — ${z.count} ${z.count === 1 ? 'proyecto' : 'proyectos'}`}
+      >
         <div class="zone__content">
           <span class="zone__num mono">0{i + 1}</span>
           <h3 class="zone__name display">{z.name}</h3>
           <p class="zone__tag mono">{z.tagline}</p>
-          <p class="zone__count mono">{z.count} propiedades disponibles</p>
+          <p class="zone__count mono">
+            {z.count} {z.count === 1 ? 'proyecto disponible' : 'proyectos disponibles'}
+          </p>
           <span class="zone__cta mono">Explorar <ArrowRight size={12} /></span>
         </div>
         <span class="zone__overlay" aria-hidden="true"></span>
-      </article>
+      </a>
     ))}
   </div>
 </section>
@@ -60,6 +69,9 @@ import ArrowRight from './icons/ArrowRight.astro';
     border-left: var(--border-thin);
     transition: flex 0.6s var(--ease-luxury);
     cursor: pointer;
+    color: var(--color-white);
+    text-decoration: none;
+    display: block;
   }
   .zone:first-child { border-left: 0; }
 

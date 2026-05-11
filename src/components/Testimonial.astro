@@ -40,21 +40,27 @@ const bg = 'https://avgrouprojects.com/cdn/shop/files/Vista_Atardecer_1.1_copia.
     inset: 0;
     background-size: cover;
     background-position: center;
-    filter: blur(8px) saturate(0.7) brightness(0.45);
-    transform: scale(1.1);
+    /*
+     * Previously used filter: blur(8px) on a fullscreen background image —
+     * extremely expensive to repaint on every scroll. Replaced with a heavy
+     * darken + slight desaturate approximated by the layered veil below;
+     * the visual difference is minimal but scroll cost drops to ~zero.
+     */
+    opacity: 0.55;
     z-index: -2;
   }
 
   .testimonial__veil {
     position: absolute;
     inset: 0;
+    /* Heavier veil compensates for removing the blur filter. */
     background:
       radial-gradient(
         circle at 50% 50%,
-        rgba(8, 8, 8, 0.4),
-        rgba(8, 8, 8, 0.92)
+        rgba(8, 8, 8, 0.55),
+        rgba(8, 8, 8, 0.95)
       ),
-      linear-gradient(180deg, rgba(8, 8, 8, 0.85), rgba(8, 8, 8, 0.85));
+      linear-gradient(180deg, rgba(8, 8, 8, 0.7), rgba(8, 8, 8, 0.7));
     z-index: -1;
   }
 

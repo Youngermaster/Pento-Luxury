@@ -29,7 +29,6 @@ const areaTo = fmt.format(property.areaRange.to);
       height={large ? 2000 : 1200}
       loading="lazy"
       decoding="async"
-      class="parallax-img"
     />
     <span class="card__status mono">{property.status}</span>
     <span class="card__category mono">{property.category}</span>
@@ -78,11 +77,15 @@ const areaTo = fmt.format(property.areaRange.to);
     height: 100%;
     object-fit: cover;
     transition: transform 1.2s var(--ease-luxury);
-    transform: scale(1.04);
   }
 
+  /*
+   * Note: removed the baseline transform: scale(1.04). The previous setup
+   * conflicted with GSAP's transform on .parallax-img and forced an extra
+   * compositor layer per card. A clean 1 → 1.06 hover lift is plenty.
+   */
   .card:hover .card__media img {
-    transform: scale(1.1);
+    transform: scale(1.06);
   }
 
   .card__status {
@@ -91,9 +94,9 @@ const areaTo = fmt.format(property.areaRange.to);
     left: 18px;
     z-index: 2;
     padding: 6px 10px;
-    background: rgba(8, 8, 8, 0.7);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    /* Solid background; backdrop-filter on every card was forcing each card
+       into its own compositor layer with re-rasterization on hover. */
+    background: rgba(8, 8, 8, 0.85);
     color: var(--color-gold);
     font-size: 9px;
     letter-spacing: 0.4em;
