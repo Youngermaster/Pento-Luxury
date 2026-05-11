@@ -1,19 +1,22 @@
 ---
-import { properties } from '../data/properties';
+import { getFeaturedProperties } from '../data/properties';
 import PropertyCard from './PropertyCard.astro';
 import ArrowRight from './icons/ArrowRight.astro';
 
-const [feature, second, third, fourth] = properties;
+const featured = getFeaturedProperties();
+const [feature, second, third, fourth] = featured;
 ---
 
-<section id="propiedades" class="properties section" aria-label="Propiedades destacadas">
+<section id="proyectos" class="properties section" aria-label="Proyectos destacados">
   <div class="container">
     <header class="properties__header">
-      <p class="label-mono" data-reveal>◆ PROPIEDADES</p>
+      <p class="label-mono" data-reveal>◆ PROYECTOS</p>
       <div class="properties__title-row">
-        <h2 class="display properties__title" data-reveal>Residencias de Autor</h2>
-        <a href="#" class="properties__more mono" data-reveal>
-          Ver todas <ArrowRight size={12} />
+        <h2 class="display properties__title" data-reveal>
+          Curaduría AV Group
+        </h2>
+        <a href="/#contacto" class="properties__more mono" data-reveal>
+          Solicitar portafolio <ArrowRight size={12} />
         </a>
       </div>
     </header>
@@ -28,9 +31,11 @@ const [feature, second, third, fourth] = properties;
       </div>
     </div>
 
-    <div class="properties__last">
-      <PropertyCard property={fourth} />
-    </div>
+    {fourth && (
+      <div class="properties__last">
+        <PropertyCard property={fourth} />
+      </div>
+    )}
   </div>
 </section>
 

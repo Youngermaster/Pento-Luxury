@@ -2,7 +2,7 @@
 import WhatsApp from './icons/WhatsApp.astro';
 import ArrowRight from './icons/ArrowRight.astro';
 
-const whatsappNumber = '5744440000'; // placeholder
+const whatsappNumber = '573012208586';
 ---
 
 <section id="contacto" class="contact section" aria-label="Contacto">
@@ -10,7 +10,7 @@ const whatsappNumber = '5744440000'; // placeholder
     <header class="contact__header">
       <p class="label-mono" data-reveal>◆ CONVERSACIÓN PRIVADA</p>
       <h2 class="display contact__title" data-reveal>
-        Tu siguiente propiedad merece<br />una conversación privada.
+        Tu próximo proyecto merece<br />una visión holística.
       </h2>
     </header>
 
@@ -43,13 +43,13 @@ const whatsappNumber = '5744440000'; // placeholder
         <div class="field">
           <label for="contact-zone" class="mono">Zona de interés</label>
           <select id="contact-zone" name="zone" required>
-            <option value="">Selecciona una zona</option>
-            <option value="poblado">El Poblado</option>
-            <option value="llano-grande">Llano Grande</option>
-            <option value="el-retiro">El Retiro</option>
-            <option value="envigado">Envigado</option>
-            <option value="santa-marta">Santa Marta</option>
-            <option value="otro">Otra ubicación</option>
+            <option value="">Selecciona una categoría</option>
+            <option value="residencial">Residencial</option>
+            <option value="vacacional">Vacacional · rentas cortas</option>
+            <option value="oficinas">Oficinas</option>
+            <option value="hotel">Hotel</option>
+            <option value="wellness">Wellness</option>
+            <option value="otro">Asesoría general</option>
           </select>
         </div>
 
@@ -69,17 +69,17 @@ const whatsappNumber = '5744440000'; // placeholder
       <aside class="contact__aside" data-reveal>
         <div class="contact__line">
           <p class="label-mono">Teléfono</p>
-          <p class="contact__value">+57 4 444 0000</p>
+          <p class="contact__value"><a href="tel:+573012208586">+57 301 220 8586</a></p>
         </div>
         <div class="contact__line">
-          <p class="label-mono">Email</p>
-          <p class="contact__value"><a href="mailto:asesores@pentoluxury.com">asesores@pentoluxury.com</a></p>
+          <p class="label-mono">Oficina</p>
+          <p class="contact__value">Cra. 30 #4 A - 45 Of. 506A<br />El Poblado · Medellín</p>
         </div>
         <hr class="contact__divider" />
         <p class="contact__or mono">O escríbenos directamente en</p>
         <a
           class="contact__whatsapp"
-          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola Pento Luxury, me interesa una asesoría privada.')}`}
+          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola AV Group, me interesa conocer su portafolio.')}`}
           target="_blank"
           rel="noopener"
         >

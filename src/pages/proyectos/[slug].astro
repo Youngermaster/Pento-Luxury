@@ -22,12 +22,16 @@ export function getStaticPaths() {
 const { property } = Astro.props;
 const related = getRelatedProperties(property.slug, 3);
 
-const whatsappNumber = '5744440000';
-const whatsappMsg = `Hola Pento Luxury. Me interesa ${property.name} (${property.zone}, ${property.city}). ¿Podemos coordinar una visita privada?`;
+const whatsappNumber = '573012208586';
+const whatsappMsg = `Hola AV Group. Me interesa ${property.name} (${property.zone}, ${property.city}). ¿Podemos coordinar una visita privada?`;
 const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMsg)}`;
 
-const title = `${property.name} — ${property.zone}, ${property.city} · Pento Luxury`;
+const title = `${property.name} — ${property.zone} · AV Group`;
 const description = property.description[0];
+
+const fmt = new Intl.NumberFormat('es-CO');
+const areaFrom = fmt.format(property.areaRange.from);
+const areaTo = fmt.format(property.areaRange.to);
 ---
 
 <Layout title={title} description={description} image={property.image}>
@@ -52,13 +56,11 @@ const description = property.description[0];
       <div class="ph-hero__veil" aria-hidden="true"></div>
 
       <div class="ph-hero__inner container">
-        <a href="/#propiedades" class="ph-hero__back mono" aria-label="Volver a propiedades">
+        <a href="/#proyectos" class="ph-hero__back mono" aria-label="Volver a proyectos">
           ← Volver
         </a>
 
-        <span class="ph-hero__status mono">
-          <Diamond size={9} /> {property.status}
-        </span>
+        <span class="ph-hero__category mono">{property.category}</span>
 
         <h1 class="ph-hero__title display">{property.name}</h1>
 
@@ -68,9 +70,15 @@ const description = property.description[0];
 
         <hr class="ph-hero__line" />
 
-        <div class="ph-hero__price-row">
-          <span class="ph-hero__price-label mono">Inversión desde</span>
-          <span class="ph-hero__price display">{property.price}</span>
+        <div class="ph-hero__meta-row">
+          <span class="ph-hero__status mono">
+            <Diamond size={9} /> {property.status}
+          </span>
+          {property.architect && (
+            <span class="ph-hero__architect mono">
+              Diseño · {property.architect}
+            </span>
+          )}
         </div>
       </div>
 
@@ -85,25 +93,29 @@ const description = property.description[0];
       <div class="container">
         <div class="ph-stats__grid">
           <div class="ph-stats__item">
-            <span class="ph-stats__label mono">Área construida</span>
-            <span class="ph-stats__value display">{property.area}</span>
+            <span class="ph-stats__label mono">Categoría</span>
+            <span class="ph-stats__value display">{property.category}</span>
           </div>
           <div class="ph-stats__item">
-            <span class="ph-stats__label mono">Habitaciones</span>
-            <span class="ph-stats__value display">{property.bedrooms}</span>
+            <span class="ph-stats__label mono">Áreas</span>
+            <span class="ph-stats__value display">{areaFrom}–{areaTo} m²</span>
           </div>
           <div class="ph-stats__item">
-            <span class="ph-stats__label mono">Baños</span>
-            <span class="ph-stats__value display">{property.bathrooms}</span>
+            <span class="ph-stats__label mono">Unidades</span>
+            <span class="ph-stats__value display">
+              {property.units.count > 0 ? property.units.count : '—'}
+            </span>
           </div>
           <div class="ph-stats__item">
-            <span class="ph-stats__label mono">Parqueaderos</span>
-            <span class="ph-stats__value display">{property.parking}</span>
+            <span class="ph-stats__label mono">Tipo</span>
+            <span class="ph-stats__value display ph-stats__value--small">{property.units.noun}</span>
           </div>
-          <div class="ph-stats__item">
-            <span class="ph-stats__label mono">Año</span>
-            <span class="ph-stats__value display">{property.yearBuilt}</span>
-          </div>
+          {property.yearBuilt && (
+            <div class="ph-stats__item">
+              <span class="ph-stats__label mono">Entrega</span>
+              <span class="ph-stats__value display">{property.yearBuilt}</span>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -112,9 +124,9 @@ const description = property.description[0];
     <section class="ph-narrative section" aria-label="Descripción">
       <div class="container ph-narrative__inner">
         <header class="ph-narrative__header">
-          <p class="label-mono" data-reveal>◆ EL ESCENARIO</p>
+          <p class="label-mono" data-reveal>◆ EL PROYECTO</p>
           <h2 class="display ph-narrative__title" data-reveal>
-            Una residencia diseñada<br />para perdurar.
+            Una visión<br />holística.
           </h2>
         </header>
 
@@ -174,23 +186,25 @@ const description = property.description[0];
     </section>
 
     <!-- Location coordinates -->
-    <section class="ph-location" aria-label="Ubicación">
-      <div class="container ph-location__inner">
-        <p class="label-mono" data-reveal>◆ COORDENADAS</p>
-        <p class="ph-location__coords mono" data-reveal>{property.coordinates}</p>
-        <p class="ph-location__zone display" data-reveal>{property.zone}, {property.city}</p>
-      </div>
-    </section>
+    {property.coordinates && (
+      <section class="ph-location" aria-label="Ubicación">
+        <div class="container ph-location__inner">
+          <p class="label-mono" data-reveal>◆ COORDENADAS</p>
+          <p class="ph-location__coords mono" data-reveal>{property.coordinates}</p>
+          <p class="ph-location__zone display" data-reveal>{property.zone}, {property.city}</p>
+        </div>
+      </section>
+    )}
 
     <!-- CTA -->
     <section class="ph-cta" aria-label="Solicitar visita">
       <div class="container ph-cta__inner">
-        <p class="label-mono" data-reveal>◆ VISITA PRIVADA</p>
+        <p class="label-mono" data-reveal>◆ CONVERSACIÓN PRIVADA</p>
         <h2 class="display ph-cta__title" data-reveal>
-          {property.name} solo se muestra<br />bajo cita previa.
+          {property.name} merece<br />una conversación a la altura.
         </h2>
         <p class="ph-cta__sub mono" data-reveal>
-          Coordina una visita acompañada por uno de nuestros asesores.
+          Coordina una visita o asesoría con uno de nuestros consultores.
         </p>
 
         <div class="ph-cta__actions" data-reveal>
@@ -201,7 +215,7 @@ const description = property.description[0];
             rel="noopener"
           >
             <WhatsApp size={16} />
-            <span>Solicitar visita</span>
+            <span>{property.invitation || 'Solicitar visita'}</span>
             <ArrowRight size={14} />
           </a>
           <a class="ph-cta__alt mono" href="/#contacto">
@@ -213,10 +227,10 @@ const description = property.description[0];
 
     <!-- Related -->
     {related.length > 0 && (
-      <section class="ph-related section" aria-label="Otras residencias">
+      <section class="ph-related section" aria-label="Otros proyectos">
         <div class="container">
           <header class="ph-related__header">
-            <p class="label-mono" data-reveal>◆ OTRAS RESIDENCIAS</p>
+            <p class="label-mono" data-reveal>◆ OTROS PROYECTOS</p>
             <h2 class="display ph-related__title" data-reveal>
               Curaduría adyacente.
             </h2>
@@ -242,7 +256,7 @@ const description = property.description[0];
 
 <style>
   /* ============================================================
-     Property hero
+     Project hero
      ============================================================ */
   .ph-hero {
     position: relative;
@@ -300,18 +314,15 @@ const description = property.description[0];
   }
   .ph-hero__back:hover { color: var(--color-gold); }
 
-  .ph-hero__status {
+  .ph-hero__category {
     color: var(--color-gold);
     font-size: 10px;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
   }
 
   .ph-hero__title {
-    font-size: clamp(48px, 8vw, 120px);
+    font-size: clamp(48px, 9vw, 130px);
     line-height: 0.95;
     letter-spacing: -0.02em;
     color: var(--color-white);
@@ -335,23 +346,29 @@ const description = property.description[0];
     margin-top: 14px;
   }
 
-  .ph-hero__price-row {
+  .ph-hero__meta-row {
     display: inline-flex;
-    align-items: baseline;
-    gap: 18px;
+    align-items: center;
+    gap: 28px;
     flex-wrap: wrap;
     margin-top: 6px;
   }
-  .ph-hero__price-label {
-    color: var(--color-dim);
+
+  .ph-hero__status {
+    color: var(--color-gold);
     font-size: 10px;
     letter-spacing: 0.4em;
     text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
   }
-  .ph-hero__price {
-    color: var(--color-gold);
-    font-size: clamp(22px, 3vw, 38px);
-    font-weight: var(--weight-light);
+
+  .ph-hero__architect {
+    color: var(--color-silver);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
   }
 
   .ph-hero__scroll {
@@ -410,6 +427,11 @@ const description = property.description[0];
     color: var(--color-white);
     font-size: clamp(20px, 2vw, 28px);
     font-weight: var(--weight-light);
+    line-height: 1.15;
+  }
+  .ph-stats__value--small {
+    font-size: clamp(13px, 1.1vw, 16px);
+    color: var(--color-silver);
   }
 
   @media (max-width: 768px) {

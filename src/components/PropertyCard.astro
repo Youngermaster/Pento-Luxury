@@ -8,11 +8,15 @@ interface Props {
 }
 
 const { property, large = false } = Astro.props;
+
+const fmt = new Intl.NumberFormat('es-CO');
+const areaFrom = fmt.format(property.areaRange.from);
+const areaTo = fmt.format(property.areaRange.to);
 ---
 
 <a
   class:list={['card', { 'card--large': large }]}
-  href={`/propiedades/${property.slug}`}
+  href={`/proyectos/${property.slug}`}
   data-cursor="view"
   data-reveal
   aria-label={`Ver ${property.name} — ${property.zone}, ${property.city}`}
@@ -28,18 +32,18 @@ const { property, large = false } = Astro.props;
       class="parallax-img"
     />
     <span class="card__status mono">{property.status}</span>
+    <span class="card__category mono">{property.category}</span>
     <div class="card__overlay" aria-hidden="true"></div>
   </div>
 
   <div class="card__body">
-    <p class="card__zone mono">{property.zone}, {property.city}</p>
+    <p class="card__zone mono">{property.zone}</p>
     <h3 class="card__name display">{property.name}</h3>
-    <p class="card__price display">{property.price}</p>
-    <p class="card__stats mono">
-      {property.bedrooms} hab · {property.area} · {property.parking} parqueaderos
+    <p class="card__meta mono">
+      {areaFrom}–{areaTo} m² · {property.units.noun}
     </p>
     <span class="card__cta mono">
-      Ver detalles <ArrowRight size={12} />
+      Ver proyecto <ArrowRight size={12} />
     </span>
   </div>
 </a>
@@ -97,6 +101,20 @@ const { property, large = false } = Astro.props;
     border-radius: var(--radius-card);
   }
 
+  .card__category {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 2;
+    padding: 6px 10px;
+    background: var(--color-gold);
+    color: var(--color-void);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    border-radius: var(--radius-card);
+  }
+
   .card__overlay {
     position: absolute;
     inset: 0;
@@ -133,20 +151,12 @@ const { property, large = false } = Astro.props;
     margin-top: 4px;
   }
 
-  .card__price {
-    font-size: clamp(16px, 1.6vw, 22px);
+  .card__meta {
     color: var(--color-gold);
-    font-weight: 400;
-    letter-spacing: 0;
-    margin-top: 4px;
-  }
-
-  .card__stats {
-    color: var(--color-silver);
     font-size: 11px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin-top: 4px;
+    margin-top: 6px;
   }
 
   .card__cta {

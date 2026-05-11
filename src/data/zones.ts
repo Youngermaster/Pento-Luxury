@@ -7,48 +7,48 @@ export interface Zone {
   alt: string;
 }
 
-const u = (id: string, w = 1600) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
+// AV Group's actual operating sub-zones in and around Medellín.
+const av = (file: string) => `https://avgrouprojects.com/cdn/shop/files/${file}`;
 
 export const zones: Zone[] = [
   {
-    id: 'poblado',
+    id: 'el-poblado',
     name: 'El Poblado',
-    tagline: 'El epicentro del lujo en Medellín',
-    count: 12,
-    image: u('1582407947304-fd86f028f716'),
-    alt: 'El Poblado — vista nocturna de Medellín',
+    tagline: 'El epicentro de la curaduría AV',
+    count: 8,
+    image: av('Foto.23.jpg'),
+    alt: 'El Poblado — corazón residencial de Medellín',
   },
   {
-    id: 'llano-grande',
-    name: 'Llano Grande',
-    tagline: 'Haciendas y fincas de autor en el Oriente',
-    count: 6,
-    image: u('1505842465776-3d90f616310d'),
-    alt: 'Llano Grande — campo y arquitectura',
+    id: 'astorga',
+    name: 'Astorga · Milla de Oro',
+    tagline: 'Capital corporativa de Medellín',
+    count: 1,
+    image: av('Astorga_IMG02_1.jpg'),
+    alt: 'Astorga, Milla de Oro — distrito financiero',
   },
   {
-    id: 'el-retiro',
-    name: 'El Retiro',
-    tagline: 'Exclusividad a 30 minutos de la ciudad',
-    count: 4,
-    image: u('1518780664697-55e3ad937233'),
-    alt: 'El Retiro — naturaleza y refugio',
+    id: 'alto-de-las-palmas',
+    name: 'Alto de las Palmas',
+    tagline: 'Aire frío y vista al valle',
+    count: 2,
+    image: av('PHOTO-2024-01-24-09-21-10.jpg'),
+    alt: 'Alto de las Palmas — montaña sobre el Valle de Aburrá',
   },
   {
-    id: 'envigado',
-    name: 'Envigado',
-    tagline: 'Tranquilidad y sofisticación urbana',
-    count: 3,
-    image: u('1600585154340-be6161a56a0c'),
-    alt: 'Envigado — fachada residencial',
+    id: 'el-campestre',
+    name: 'El Campestre',
+    tagline: 'Discreción y arquitectura de autor',
+    count: 1,
+    image: av('SM_3.jpg'),
+    alt: 'El Campestre — sector residencial consolidado',
   },
   {
-    id: 'santa-marta',
-    name: 'Santa Marta',
-    tagline: 'Frente al mar Caribe',
-    count: 5,
-    image: u('1507525428034-b723cf961d3e'),
-    alt: 'Santa Marta — costa Caribe',
+    id: 'nuevo-provenza',
+    name: 'Nuevo Provenza',
+    tagline: 'Donde la noche y la curaduría se cruzan',
+    count: 1,
+    image: av('IMG_1526.jpg'),
+    alt: 'Nuevo Provenza — escena vibrante de El Poblado',
   },
 ];

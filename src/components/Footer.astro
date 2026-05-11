@@ -4,16 +4,30 @@ import LinkedIn from './icons/LinkedIn.astro';
 
 const cols = [
   {
-    title: 'Propiedades',
-    items: ['El Poblado', 'Llano Grande', 'Santa Marta'],
+    title: 'Proyectos',
+    items: [
+      { label: 'Selvavignon', href: '/proyectos/selvavignon' },
+      { label: 'Altozza', href: '/proyectos/altozza' },
+      { label: 'Wake', href: '/proyectos/wake' },
+      { label: 'Hive Bluum', href: '/proyectos/hive-bluum' },
+    ],
   },
   {
-    title: 'Zonas',
-    items: ['Envigado', 'El Retiro', 'Rionegro'],
+    title: 'Categorías',
+    items: [
+      { label: 'Residencial', href: '/#proyectos' },
+      { label: 'Vacacional', href: '/#proyectos' },
+      { label: 'Oficinas', href: '/#proyectos' },
+      { label: 'Hotel · Wellness', href: '/#proyectos' },
+    ],
   },
   {
-    title: 'Historia',
-    items: ['Equipo', 'Prensa', 'Filosofía'],
+    title: 'Visión',
+    items: [
+      { label: 'Equipo', href: '/#experiencia' },
+      { label: 'Manifiesto', href: '/#manifiesto' },
+      { label: 'Contacto', href: '/#contacto' },
+    ],
   },
 ];
 ---
@@ -22,11 +36,12 @@ const cols = [
   <div class="container footer__inner">
     <div class="footer__brand">
       <h2 class="footer__logo display">
-        PENTO <span aria-hidden="true">◆</span> LUXURY
+        AV <span aria-hidden="true">◆</span> GROUP
       </h2>
       <p class="footer__address mono">
-        Medellín, Colombia<br />
-        Cra. 43A · El Poblado
+        Cra. 30 #4 A - 45 Oficina 506A<br />
+        El Poblado · Medellín · Colombia<br />
+        +57 301 220 8586
       </p>
     </div>
 
@@ -36,7 +51,7 @@ const cols = [
           <h3 class="label-mono footer__col-title">{c.title}</h3>
           <ul>
             {c.items.map((it) => (
-              <li><a class="footer__col-link" href="#">{it}</a></li>
+              <li><a class="footer__col-link" href={it.href}>{it.label}</a></li>
             ))}
           </ul>
         </div>
@@ -47,10 +62,10 @@ const cols = [
   <hr class="footer__divider" />
 
   <div class="container footer__bottom">
-    <p class="footer__copy mono">© 2026 Pento Luxury. Todos los derechos reservados.</p>
+    <p class="footer__copy mono">© 2026 AV Group. Todos los derechos reservados.</p>
     <div class="footer__social" aria-label="Redes sociales">
-      <a href="#" aria-label="Instagram"><Instagram size={16} /></a>
-      <a href="#" aria-label="LinkedIn"><LinkedIn size={16} /></a>
+      <a href="https://www.instagram.com/avgroup.projects/" target="_blank" rel="noopener" aria-label="Instagram @avgroup.projects"><Instagram size={16} /></a>
+      <a href="https://www.tiktok.com/@avgroup.projects" target="_blank" rel="noopener" aria-label="TikTok @avgroup.projects"><LinkedIn size={16} /></a>
     </div>
   </div>
 </footer>

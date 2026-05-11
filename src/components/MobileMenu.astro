@@ -2,16 +2,16 @@
 import Close from './icons/Close.astro';
 
 const links = [
-  { href: '#propiedades', label: 'Propiedades' },
-  { href: '#zonas', label: 'Zonas' },
-  { href: '#experiencia', label: 'Historia' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/#proyectos', label: 'Proyectos' },
+  { href: '/#zonas', label: 'Zonas' },
+  { href: '/#experiencia', label: 'Visión' },
+  { href: '/#contacto', label: 'Contacto' },
 ];
 ---
 
 <div class="mmenu" data-mobile-menu hidden aria-hidden="true">
   <div class="mmenu__bar">
-    <span class="mmenu__brand">PENTO <span aria-hidden="true">◆</span> LUXURY</span>
+    <span class="mmenu__brand">AV <span aria-hidden="true">◆</span> GROUP</span>
     <button type="button" class="mmenu__close" data-mobile-close aria-label="Cerrar menú">
       <Close size={22} />
     </button>
@@ -30,10 +30,10 @@ const links = [
     ))}
   </nav>
   <div class="mmenu__footer">
-    <a href="#contacto" class="btn btn--solid mmenu__cta" data-mobile-link>
-      Agendar visita
+    <a href="/#contacto" class="btn btn--solid mmenu__cta" data-mobile-link>
+      Agendar reunión
     </a>
-    <p class="mmenu__contact mono">+57 4 444 0000 · asesores@pentoluxury.com</p>
+    <p class="mmenu__contact mono">+57 301 220 8586 · El Poblado, Medellín</p>
   </div>
 </div>
 

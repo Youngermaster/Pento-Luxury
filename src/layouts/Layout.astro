@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'Pento Luxury — Propiedades de Ultra-Lujo en Colombia',
-  description = 'Residencias exclusivas en El Poblado, Llano Grande, El Retiro y Santa Marta. Curaduría de propiedades de alto patrimonio en Colombia.',
+  title = 'AV Group — Proyectos Inmobiliarios de Lujo en Medellín',
+  description = 'Veinte años desarrollando proyectos residenciales, vacacionales, oficinas, hoteles y wellness en El Poblado, Astorga, Alto de las Palmas y El Campestre.',
   image = '/og-image.jpg',
 } = Astro.props;
 
@@ -20,17 +20,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const realEstateAgentJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
-  name: 'Pento Luxury',
+  name: 'AV Group',
   description,
   url: Astro.site?.toString(),
-  areaServed: ['Medellín', 'El Poblado', 'Llano Grande', 'El Retiro', 'Envigado', 'Santa Marta', 'Colombia'],
-  telephone: '+57 4 444 0000',
-  email: 'asesores@pentoluxury.com',
+  areaServed: ['Medellín', 'El Poblado', 'Astorga', 'Milla de Oro', 'Alto de las Palmas', 'Envigado', 'El Campestre', 'Colombia'],
+  telephone: '+57 301 220 8586',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Cra. 30 #4 A - 45 Oficina 506A',
     addressLocality: 'Medellín',
+    addressRegion: 'El Poblado',
     addressCountry: 'CO',
   },
+  sameAs: [
+    'https://www.instagram.com/avgroup.projects/',
+    'https://www.tiktok.com/@avgroup.projects',
+  ],
 };
 ---
 
@@ -56,7 +61,7 @@ const realEstateAgentJsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.site).toString()} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="Pento Luxury" />
+    <meta property="og:site_name" content="AV Group" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />

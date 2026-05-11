@@ -22,8 +22,8 @@ export function initContact() {
 
     // Simulate brief processing for cinematic feedback, then deep-link to WhatsApp.
     setTimeout(() => {
-      const number = '5744440000';
-      const msg = `Hola Pento Luxury. Soy ${name}. Mi número es ${phone}. Me interesa la zona ${zone}.`;
+      const number = '573012208586';
+      const msg = `Hola AV Group. Soy ${name}. Mi número es ${phone}. Me interesa la categoría ${zone}.`;
       const url = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank', 'noopener');
 

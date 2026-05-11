@@ -2,13 +2,11 @@
 import Diamond from './icons/Diamond.astro';
 import ChevronDown from './icons/ChevronDown.astro';
 
-// Hot-linked Unsplash placeholder until shoot photography arrives.
-// Modern luxury architecture / twilight villa.
-const heroImg =
-  'https://images.unsplash.com/photo-1613553497126-a44624272024?w=2400&q=80&auto=format&fit=crop';
+// Hero image: AV Group's Selvavignon exterior — flagship project.
+const heroImg = 'https://avgrouprojects.com/cdn/shop/files/Exterior2_1.jpg';
 ---
 
-<section class="hero" aria-label="Pento Luxury — Inicio">
+<section class="hero" aria-label="AV Group — Inicio">
   <!-- Layer 1: photographic background -->
   <div class="hero__layer hero__layer--bg parallax-layer" data-depth="0.4" aria-hidden="true">
     <img
@@ -45,19 +43,19 @@ const heroImg =
   <!-- Layer 4: foreground type & content -->
   <div class="hero__inner">
     <div class="hero__eyebrow">
-      <span class="label-mono"><Diamond size={9} /> Antioquia · Colombia</span>
+      <span class="label-mono"><Diamond size={9} /> Medellín · Colombia</span>
     </div>
 
-    <h1 class="hero__title display" aria-label="Pento Luxury">
-      <span class="hero__title-row">PENT<span class="hero__o" aria-hidden="true">O</span></span>
-      <span class="hero__italic">LUXURY</span>
+    <h1 class="hero__title display" aria-label="AV Group — Una visión holística">
+      <span class="hero__title-row">A<span class="hero__o" aria-hidden="true">V</span></span>
+      <span class="hero__italic">GROUP</span>
     </h1>
 
     <hr class="hero__line" aria-hidden="true" />
 
     <p class="hero__subtitle mono">
-      Propiedades de ultra-lujo<br />
-      en Antioquia y Colombia
+      Proyectos inmobiliarios de lujo<br />
+      Una visión holística
     </p>
 
     <a href="#descubrir" class="hero__scroll" aria-label="Desplazar para descubrir">
@@ -70,16 +68,16 @@ const heroImg =
   <!-- Stats bar (bottom) -->
   <div class="hero__stats" aria-label="Estadísticas">
     <div class="hero__stat">
-      <span class="hero__stat-label mono">ZONA</span>
-      <span class="hero__stat-value display">El Poblado, Llano Grande</span>
+      <span class="hero__stat-label mono">SEDE</span>
+      <span class="hero__stat-value display">El Poblado, Medellín</span>
     </div>
     <div class="hero__stat">
       <span class="hero__stat-label mono">PROYECTOS</span>
-      <span class="hero__stat-value display"><span data-counter="24">0</span></span>
+      <span class="hero__stat-value display"><span data-counter="17">0</span></span>
     </div>
     <div class="hero__stat">
-      <span class="hero__stat-label mono">PRECIO DESDE</span>
-      <span class="hero__stat-value display">$800M COP</span>
+      <span class="hero__stat-label mono">AÑOS</span>
+      <span class="hero__stat-value display"><span data-counter="20">0</span>+</span>
     </div>
   </div>
 </section>
